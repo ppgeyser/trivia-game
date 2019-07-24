@@ -1,9 +1,18 @@
-document.ready(function() {
-    //hide everything except for start screen
+$(document).ready(function () {
+
+    $('#page-question').hide();
+    $('#page-answer').hide();
+    $('#page-end').hide();
+    $('#page-intro').show();
 
     //start button on click function
+    $("#intro-button").click(function () {
 
         //hide everything except for question screen
+        $('#page-question').show();
+        $('#page-answer').hide();
+        $('#page-end').hide();
+        $('#page-intro').hide();
 
         //var questionBank = [
             //{
@@ -89,5 +98,6 @@ document.ready(function() {
                 //run game function
                 //hide end page
                 //show question page
+    })
 
 })
