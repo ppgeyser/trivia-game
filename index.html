@@ -1,42 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="assets/javascript/app.js"></script>
-        <title>The Office Trivia Quiz!</title>
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+    <title>The Office Trivia Quiz!</title>
+</head>
+
 <body>
-    
-    <!-- start page
-        Title remains persistent throughout all pages
-        Start button
 
-    question page
-        Title remains persistent throughout all pages
-        time remaining
-        Question
-        Answers
-            Answer Button 1
-            Answer Button 2
-            Answer Button 3
-            Answer Button 4
-            
-    answer page
-        Title remains persistent throughout all pages
-        Correct/Incorrect/Out of time
-        (If incorrect/out of time) display correct answer
+    <div class="jumbotron jumbotron-fluid text-center content">
+        <div class="container">
 
-    end page
-        Title remains persistent throughout all pages
-        Ending message
-            Correct score
-            Incorrect score
-            Unanswered score
-        Start over button -->
+            <!-- start page. Title remains persistent throughout all pages-->
+            <h1 class="display-4">The Office Trivia!</h1>
+
+            <!--Start button that can be hidden with jquery -->
+            <div id="page-intro">
+                <hr class="my-4">
+                <p>Click on this button to begin!</p>
+                <p class="lead">
+                    <a id="intro-button" class="btn btn-primary btn-lg" href="#" role="button">Begin</a>
+                </p>
+            </div>
+
+            <!-- Question Page -->
+            <div id="page-question">
+
+                <!-- time remaining -->
+                <p>Time Remaining: <span id="text-time-remaining"></span>
+                </p>
+
+                <!-- Question populated by jquery -->
+                <div id="text-question"></div>
+
+                <!-- Answer buttons made dynamically with jquery -->
+                <div id="buttons-answer"></div>
+
+            </div>
+
+            <!-- Answer Page -->
+            <div id="page-answer">
+
+                <!-- Correct/Incorrect/Out of time -->
+                <div id="text-answer-alert"></div>
+
+                <!-- (If incorrect/out of time) display correct answer -->
+                <div id="text-answer"></div>
+
+            </div>
+
+            <!--End Page-->
+            <div id="page-end">
+
+                <!-- Ending message -->
+                <p>All done! Here's how you did!</p>
+
+                <!-- Correct score -->
+                <p>Correct: <span id="text-score-correct"></span>
+                </p>
+
+                <!-- Incorrect score -->
+                <p>Incorrect: <span id="text-score-incorrect"></span>
+                </p>
+
+                <!-- Unanswered score -->
+                <p>Correct: <span id="text-score-unanswered"></span>
+                </p>
+
+                <!-- Start over button -->
+                <a id="button-reset" class="btn btn-primary btn-lg" href="#" role="button">Play Again</a>
+            </div>
+
+        </div>
+    </div>
 
 </body>
+
 </html>
