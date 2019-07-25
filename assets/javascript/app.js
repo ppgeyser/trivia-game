@@ -119,19 +119,71 @@ $(document).ready(function () {
         ];
 
         console.log(questionBank);
-    
+        
         var correct = 0
         var incorrect = 0
         var unanswered = 0
         var questionsUsed = []
 
+        //run game function
+        gameFunction();
+
         //game function/randomly select a question
+        function gameFunction () {
+            
             //randomly select a question
-            //if question is not in the questionUsed array 
-                //print question
-                //print answer buttons (randomized)
-                //start 30 second timer and print time remaining
-            //otherwise randomly select another question
+            var random = Math.floor(Math.random() * questionBank.length);
+            var questionRandom = questionBank[random];
+            console.log(questionRandom);
+
+            //print question
+            $('#text-question').text(questionRandom.question);
+
+            //randomize answers
+
+                //create a blank answer bank that both correct and incorrect answers will go into    
+                var answerBank = [];
+
+                //push correct answer into answerBank
+                answerBank.push(questionRandom.correct_answer);
+
+                //push incorrect answers into answerBank
+                for (var i = 0; i < questionRandom.incorrect_answers.length; i++) {
+                    answerBank.push(questionRandom.incorrect_answers[i]);
+                }
+
+                //shuffle array so that answer isn't constantly in index 0
+                function shuffleArray(array) {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]];
+                    }
+                }
+
+                shuffleArray(answerBank);
+                console.log(answerBank);
+
+            //print answer buttons
+            for (var i = 0; i < answerBank.length; i++) {
+                var button = $('<button>');
+                var br = $("<br>")
+                button.addClass("btn").addClass("btn-primary").addClass("btn-lg").addClass("buttons-answer");
+                button.attr("type", "button")
+                button.text(answerBank[i]);
+                $("#buttons-group").append(button);
+            }
+
+            //start 30 second timer and print time remaining
+            
+
+            //move question to questionUsed array
+            questionsUsed.push(questionRandom);
+            questionBank.splice(random, 1);
+            console.log(questionsUsed);
+            console.log(questionBank);
+
+        }
+
 
         //if correct answer selected
             //hide question page
@@ -165,12 +217,13 @@ $(document).ready(function () {
             //return to question page
             //run game function
             
-        //if questionsUsed.length === questionBank.length
+        //if questionBank.length === 0;
             //hide all pages
             //show end page
             //print correct, incorrect, unanswered
             //play again button onclick
                 //reset correct, incorrect, unanswered, and questionsUsed
+                //move all questions questionUsed back to questionBank
                 //run game function
                 //hide end page
                 //show question page
