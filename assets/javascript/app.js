@@ -25,7 +25,7 @@ $(document).ready(function () {
                     "Megan"
                 ]
             },
-            
+
             {
                 "question": "How many times do Jan and Michael have sex while in Jamaica?",
                 "correct_answer": "Six Times",
@@ -120,10 +120,10 @@ $(document).ready(function () {
 
         console.log(questionBank);
     
-        //var correct = 0
-        //var incorrect = 0
-        //var unanswered = 0
-        //var questionsUsed = []
+        var correct = 0
+        var incorrect = 0
+        var unanswered = 0
+        var questionsUsed = []
 
         //game function/randomly select a question
             //randomly select a question
