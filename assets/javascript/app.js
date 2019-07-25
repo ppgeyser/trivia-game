@@ -15,6 +15,7 @@ $(document).ready(function () {
         $('#page-intro').hide();
 
         var questionBank = [
+
             {
                 "question": "What is Erin's real first name?",
                 "correct_answer": "Kelly",
@@ -24,6 +25,7 @@ $(document).ready(function () {
                     "Megan"
                 ]
             },
+            
             {
                 "question": "How many times do Jan and Michael have sex while in Jamaica?",
                 "correct_answer": "Six Times",
@@ -33,6 +35,7 @@ $(document).ready(function () {
                     "Two Times"
                 ]
             },
+
             {
                 "question": "Where do Jim and Pam have their honeymoon?",
                 "correct_answer": "Puerto Rico",
@@ -42,6 +45,7 @@ $(document).ready(function () {
                     "Hawaii"
                 ]
             },
+
             {
                 "question": "what is the subject of the painting stuck to wall in Jim's parents' house?",
                 "correct_answer": "A Clown",
@@ -51,6 +55,7 @@ $(document).ready(function () {
                     "The ocean"
                 ]
             },
+
             {
                 "question": "What car does Dwight buy from Andy and then immediately re-sell?",
                 "correct_answer": "Nissan X-Terra",
@@ -60,6 +65,7 @@ $(document).ready(function () {
                     "Cadillac Escalade"
                 ]
             },
+
             {
                 "question": "Which one of Angela's cats does Dwight stick in the freezer?",
                 "correct_answer": "Sprinkles",
@@ -69,6 +75,7 @@ $(document).ready(function () {
                     "Mr. Ash"
                 ]
             },
+
             {
                 "question": "What is the name of the nightclub Michael and Dwight meet Ryan at in New York City?",
                 "correct_answer": "Prerogative",
@@ -78,6 +85,7 @@ $(document).ready(function () {
                     "The Powder Room"
                 ]
             },
+
             {
                 "question": "What movie do Michael and Holly spoof in their company picnic skit?",
                 "correct_answer": "Slumdog Millionaire",
@@ -87,6 +95,7 @@ $(document).ready(function () {
                     "Back to the Future"
                 ]
             },
+
             {
                 "question": "What is Katy selling at the office before going on a date with Jim?",
                 "correct_answer": "Purses",
@@ -96,6 +105,7 @@ $(document).ready(function () {
                     "Pretzels"
                 ]
             },
+
             {
                 "question": "What is Roy's last name?",
                 "correct_answer": "Anderson",
@@ -104,7 +114,8 @@ $(document).ready(function () {
                     "Wallace",
                     "Vance"
                 ]
-            },
+            }
+
         ];
 
         console.log(questionBank);
