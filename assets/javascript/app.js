@@ -47,7 +47,7 @@ $(document).ready(function () {
             },
 
             {
-                "question": "what is the subject of the painting stuck to wall in Jim's parents' house?",
+                "question": "What is the subject of the painting stuck to wall in Jim's parents' house?",
                 "correct_answer": "A clown",
                 "incorrect_answers": [
                     "Jim and his brothers as children",
@@ -97,12 +97,12 @@ $(document).ready(function () {
             },
 
             {
-                "question": "What is Katy selling at the office when her and Jim and then go on a date?",
-                "correct_answer": "Purses",
+                "question": "What Dunder-Mifflin branch is Karen originally from?",
+                "correct_answer": "Stamford",
                 "incorrect_answers": [
-                    "Catalogs",
-                    "Insurance",
-                    "Pretzels"
+                    "Utica",
+                    "Buffalo",
+                    "Nashua"
                 ]
             },
 
