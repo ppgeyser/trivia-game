@@ -130,6 +130,10 @@ $(document).ready(function () {
 
         //game function/randomly select a question
         function gameFunction () {
+
+            //clear question and answers from previous round
+            $("#text-question").empty();
+            $("#buttons-group").empty();
             
             //randomly select a question
             var random = Math.floor(Math.random() * questionBank.length);
@@ -169,12 +173,13 @@ $(document).ready(function () {
                 var br = $("<br>")
                 button.addClass("btn").addClass("btn-primary").addClass("btn-lg").addClass("buttons-answer");
                 button.attr("type", "button")
+                button.val(answerBank[i]);
                 button.text(answerBank[i]);
                 $("#buttons-group").append(button);
             }
 
             //start 30 second timer and print time remaining
-            
+
 
             //move question to questionUsed array
             questionsUsed.push(questionRandom);
@@ -184,27 +189,62 @@ $(document).ready(function () {
 
         }
 
+        //answer button on click
+        $(document).on("click", ".buttons-answer", function () {
+            var userGuess = $(this).val();
+            console.log(userGuess);
 
-        //if correct answer selected
-            //hide question page
-            //show answer page
-            //print correct answer message
-            //correct++
-            //wait 5 seconds
-            //push question into questionUsed array
-            //return to question page
-            //run game function
+            var answer = questionsUsed[(questionsUsed.length)-1].correct_answer;
+            console.log(answer);
 
-        //if wrong answer selected
-            //hide question page
-            //show answer page
-            //print incorrect answer message
-            //print correct answer
-            //incorrect++
-            //wait 5 seconds
-            //push question into questionUsed array
-            //return to question page
-            //run game function
+                //if correct answer selected
+                if (userGuess === answer) {
+                    console.log("correct!");
+
+                    //hide question page
+                    $('#page-question').hide();
+                    
+                    //show answer page
+                    $('#page-answer').show();
+                    
+                    //print correct answer message
+                    var message = $("<h4>");
+                    message.text("Correct!");
+                    $("#text-answer-alert").append(message);
+                    
+                    //correct++
+                    correct++;
+                    
+                    //wait 5 seconds
+                    setTimeout(fiveSeconds, 5000);
+
+                    function fiveSeconds () {
+                        //clear answer screen
+                        $("#text-answer-alert").empty();
+                        
+                        //run game function
+                        gameFunction();
+
+                        //return to question page
+                        $('#page-question').show();
+                        $('#page-answer').hide();
+                    }
+                }
+        
+                //if wrong answer selected
+                    //hide question page
+                    //show answer page
+                    //print incorrect answer message
+                    //print correct answer
+                    //incorrect++
+                    //wait 5 seconds
+                    //push question into questionUsed array
+                    //return to question page
+                    //run game function
+
+
+        })
+
 
         //if unanswered
             //hide question page
