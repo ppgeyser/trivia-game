@@ -124,27 +124,149 @@ $(document).ready(function () {
         var incorrect = 0
         var unanswered = 0
         var questionsUsed = []
+        var timer = 30;
+        var intervalId;
 
-        function endGame () {
+        //run game function and timer
+        gameFunction();
+        runTimer();
+
+        //answer button on click
+        $(document).on("click", ".buttons-answer", function () {
+            var userGuess = $(this).val();
+            console.log(userGuess);
+
+            var answer = questionsUsed[(questionsUsed.length) - 1].correct_answer;
+            console.log(answer);
+
+            stopTimer();
+
+            //if wrong answer selected
+            if (userGuess !== answer) {
+
+                //hide question page
+                $('#page-question').hide();
+
+                //show answer page
+                $('#page-answer').show();
+
+                //print incorrect answer message
+                var message = $("<h4>");
+                message.text("Incorrect!");
+                $("#text-answer-alert").append(message);
+
+                //print correct answer
+                $("#text-answer").text("The correct answer was: " + answer);
+
+                //incorrect++
+                incorrect++
+
+                //wait 5 seconds
+                setTimeout(fiveSeconds, 5000);
+
+                function fiveSeconds() {
+
+                    //clear answer screen
+                    $("#text-answer-alert").empty();
+                    $("#text-answer").empty();
+
+                    if (questionBank.length == 0) {
+                        endGame();
+                    } else {
+                        //run game function
+                        gameFunction();
+                        runTimer();
+
+                        //return to question page
+                        $('#page-question').show();
+                        $('#page-answer').hide();
+                    }
+                }
+            }
+
+            //if correct answer selected
+            if (userGuess === answer) {
+                console.log("correct!");
+
+                //hide question page
+                $('#page-question').hide();
+
+                //show answer page
+                $('#page-answer').show();
+
+                //print correct answer message
+                var message = $("<h4>");
+                message.text("Correct!");
+                $("#text-answer-alert").append(message);
+
+                //correct++
+                correct++;
+
+                //wait 5 seconds
+                setTimeout(fiveSeconds, 5000);
+
+                function fiveSeconds() {
+                    //clear answer screen
+                    $("#text-answer-alert").empty();
+
+                    if (questionBank.length == 0) {
+                        endGame();
+                    } else {
+                        //run game function
+                        gameFunction();
+                        runTimer();
+
+                        //return to question page
+                        $('#page-question').show();
+                        $('#page-answer').hide();
+                    }
+                }
+            }
+        })
+
+        function runTimer() {
+            clearInterval(intervalId);
+            intervalId = setInterval(decrement, 1000);
+        }
+
+        function decrement() {
+
+            timer--;
+            $("#text-time-remaining").text(timer);
+
+            if (timer === 0) {
+                stop();
+                outOfTime();
+            }
+        }
+
+        function stopTimer() {
+
+            clearInterval(intervalId);
+            timer = 30;
+            $("#text-time-remaining").text(timer);
+        }
+
+        function endGame() {
 
             //hide all pages
             $('#page-question').hide();
             $('#page-answer').hide();
             $('#page-intro').hide();
-        
+
             //show end page
             $('#page-end').show();
-        
+
             //print correct, incorrect, unanswered
             $("#text-score-correct").text(correct);
             $("#text-score-incorrect").text(incorrect);
             $("#text-score-unanswered").text(unanswered);
-        
+
             //play again button onclick
-            $("#button-reset").on("click", function (){
+            $("#button-reset").on("click", function () {
 
                 //move all questions questionUsed back to questionBank
-                questionBank= questionBank.concat(questionsUsed);
+                questionBank = questionBank.concat(questionsUsed);
 
                 //reset correct, incorrect, unanswered, and questionsUsed
                 correct = 0;
@@ -154,21 +276,19 @@ $(document).ready(function () {
 
                 console.log(questionBank);
                 console.log(questionsUsed)
-            
+
                 //hide end page
                 $('#page-end').hide();
 
                 //run game function
                 gameFunction();
-            
+                runTimer();
+
                 //show question page
                 $('#page-question').show();
 
             })
         }
-
-         //run game function
-         gameFunction();
 
         //game function/randomly select a question
         function gameFunction() {
@@ -231,105 +351,54 @@ $(document).ready(function () {
 
         }
 
-        //answer button on click
-        $(document).on("click", ".buttons-answer", function () {
-            var userGuess = $(this).val();
-            console.log(userGuess);
+        //if unanswered
+        function outOfTime() {
+
+            stopTimer();
 
             var answer = questionsUsed[(questionsUsed.length) - 1].correct_answer;
-            console.log(answer);
 
-            //if wrong answer selected
-            if (userGuess !== answer) {
+            //hide question page
+            $('#page-question').hide();
 
-                //hide question page
-                $('#page-question').hide();
+            //show answer page
+            $('#page-answer').show();
 
-                //show answer page
-                $('#page-answer').show();
+            //print unanswered answer message
+            var message = $("<h4>");
+            message.text("You ran out of time!");
+            $("#text-answer-alert").append(message);
 
-                //print incorrect answer message
-                var message = $("<h4>");
-                message.text("Incorrect!");
-                $("#text-answer-alert").append(message);
+            //print correct answer
+            $("#text-answer").text("The correct answer was: " + answer);
 
-                //print correct answer
-                $("#text-answer").text("The correct answer was: "+ answer);
+            //incorrect++
+            unanswered++
 
-                //incorrect++
-                incorrect++
+            //wait 5 seconds
+            setTimeout(fiveSeconds, 5000);
 
-                //wait 5 seconds
-                setTimeout(fiveSeconds, 5000);
+            function fiveSeconds() {
 
-                function fiveSeconds() {
+                //clear answer screen
+                $("#text-answer-alert").empty();
+                $("#text-answer").empty();
 
-                    //clear answer screen
-                    $("#text-answer-alert").empty();
-                    $("#text-answer").empty();
+                if (questionBank.length == 0) {
+                    endGame();
+                } else {
+                    //run game function
+                    gameFunction();
+                    runTimer();
 
-                    if (questionBank.length == 0) {
-                        endGame ();
-                    } else {
-                        //run game function
-                        gameFunction();
-    
-                        //return to question page
-                        $('#page-question').show();
-                        $('#page-answer').hide();
-                    }
+                    //return to question page
+                    $('#page-question').show();
+                    $('#page-answer').hide();
                 }
             }
 
-            //if correct answer selected
-            if (userGuess === answer) {
-                console.log("correct!");
+        }
 
-                //hide question page
-                $('#page-question').hide();
-
-                //show answer page
-                $('#page-answer').show();
-
-                //print correct answer message
-                var message = $("<h4>");
-                message.text("Correct!");
-                $("#text-answer-alert").append(message);
-
-                //correct++
-                correct++;
-
-                //wait 5 seconds
-                setTimeout(fiveSeconds, 5000);
-
-                function fiveSeconds() {
-                    //clear answer screen
-                    $("#text-answer-alert").empty();
-
-                    if (questionBank.length == 0) {
-                        endGame ();
-                    } else {
-                        //run game function
-                        gameFunction();
-    
-                        //return to question page
-                        $('#page-question').show();
-                        $('#page-answer').hide();
-                    }
-                }
-            }
-        })
-
-        //if unanswered
-        //hide question page
-        //show answer page
-        //print unanswered message
-        //print correct answer
-        //unanswered++
-        //wait 5 seconds
-        //push question into questionUsed array
-        //return to question page
-        //run game function
 
     })
 
