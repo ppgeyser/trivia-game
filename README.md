@@ -1,4 +1,4 @@
-# trivia-game
+# "The Office" Trivia Game!
 
 In this trivia game, you have 30 seconds per round to answer ten questions about the show "The Office." The game will track how many questions you got correct, incorrect, and ran out of time for; display screens for each situation; and display the final score at the end of the game. 
 
